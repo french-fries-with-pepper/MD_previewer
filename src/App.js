@@ -3,11 +3,13 @@ import { Provider, connect } from "react-redux";
 import { createStore } from "redux";
 import marked from "marked";
 import DOMpurify from "dompurify";
+import initialMD from "./initialMD";
+import "./app.css";
 
 // MD to clearn html
 
 const mdToClearnHtml = mdText => {
-  return DOMpurify.sanitize(marked(mdText), {
+  return DOMpurify.sanitize(marked(mdText, { breaks: true }), {
     FORBID_ATTR: ["id"]
   });
 };
@@ -23,8 +25,6 @@ const getNewConvertedMd = mdText => {
     htmlText: mdToClearnHtml(mdText)
   };
 };
-
-const initialMD = "## Marked in the browser\n\nRendered by **marked**.";
 
 const initialState = {
   input: initialMD,
@@ -66,8 +66,11 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="inputWrap">
+        <header className="inputWrap__header" />
+
         <textarea
+          className="inputWrap__input"
           name=""
           id="editor"
           cols="30"
@@ -82,15 +85,20 @@ class Editor extends React.Component {
 
 const MarkDownPreview = props => {
   return (
-    <div>
-      <article dangerouslySetInnerHTML={{ __html: props.somehtml }} />
+    <div className="outputWrap">
+      <header className="outputWrap__header" />
+      <article
+        className="outputWrap__view"
+        id="preview"
+        dangerouslySetInnerHTML={{ __html: props.somehtml }}
+      />
     </div>
   );
 };
 
 function ConverterMd(props) {
   return (
-    <div>
+    <div className="appWrap">
       <Editor mdText={props.input} updatePreview={props.updatePreview} />
       <MarkDownPreview somehtml={props.output} />
     </div>
