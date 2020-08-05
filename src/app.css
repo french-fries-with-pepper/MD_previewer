@@ -1,3 +1,6 @@
+html{
+  font-size: 16px;
+}
 *,
 *::before,
 *::after {
@@ -6,8 +9,12 @@
   box-sizing: border-box;
 }
 
+:root{
+  --bg-all:slategray;
+}
+
 body {
-  background-color: slategray;
+  background-color: var(--bg-all);
 }
 
 #root {
@@ -19,7 +26,7 @@ body {
 .appWrap {
   width: 100%;
   height: 100%;
-  background-color: slategray;
+  background-color: var(--bg-all);
 
   display: flex;
   flex-direction: row;
@@ -54,7 +61,12 @@ body {
   border: none;
   width: 100%;
   height: 100%;
-  background-color: rgb(174, 207, 218);
+  background-color: rgba(174, 207, 218,0.2);
+
+}
+.inputWrap__input:focus{
+  background-color: rgba(174, 207, 218,0.9);
+
 }
 
 .outputWrap__view {
@@ -67,6 +79,8 @@ body {
   height: 100%;
   overflow-y: scroll;
 }
+
+
 
 .inputWrap__header,
 .outputWrap__header {
@@ -100,10 +114,14 @@ ol {
   padding-left: 1rem;
 }
 .outputWrap__view code {
-  background-color: yellowgreen;
+  background-color: rgba(7, 20, 20);
+  color: antiquewhite;
 }
 .outputWrap__view pre {
-  background-color: yellowgreen;
+  background-color: rgb(7, 20, 20);
+}
+.outputWrap__view img {
+  width: 100%;
 }
 .outputWrap__view tr {
   background-color: antiquewhite;
@@ -117,12 +135,15 @@ ol {
 }
 
 @media (orientation: portrait) {
+  html{
+    font-size: 14px;
+  }
   .appWrap {
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-around;
     align-items: center;
-
+    min-width: 320px;
     margin: 0;
     position: absolute;
     top: 50%;
