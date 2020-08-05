@@ -8,9 +8,9 @@ import "./app.css";
 
 // MD to clearn html
 
-const mdToClearnHtml = mdText => {
+const mdToClearnHtml = (mdText) => {
   return DOMpurify.sanitize(marked(mdText, { breaks: true }), {
-    FORBID_ATTR: ["id"]
+    FORBID_ATTR: ["id"],
   });
 };
 
@@ -18,17 +18,17 @@ const mdToClearnHtml = mdText => {
 
 const INPUT_CHANGED = "INPUT_CHANGED";
 
-const getNewConvertedMd = mdText => {
+const getNewConvertedMd = (mdText) => {
   return {
     type: INPUT_CHANGED,
     mdText,
-    htmlText: mdToClearnHtml(mdText)
+    htmlText: mdToClearnHtml(mdText),
   };
 };
 
 const initialState = {
   input: initialMD,
-  output: mdToClearnHtml(initialMD)
+  output: mdToClearnHtml(initialMD),
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -36,7 +36,7 @@ const mainReducer = (state = initialState, action) => {
     case INPUT_CHANGED:
       return {
         input: action.mdText,
-        output: action.htmlText
+        output: action.htmlText,
       };
     default:
       return state;
@@ -67,7 +67,7 @@ class Editor extends React.Component {
   render() {
     return (
       <div className="inputWrap">
-        <header className="inputWrap__header" />
+        <h2 className="inputWrap__header">Input MarkDown</h2>
 
         <textarea
           className="inputWrap__input"
@@ -83,10 +83,10 @@ class Editor extends React.Component {
   }
 }
 
-const MarkDownPreview = props => {
+const MarkDownPreview = (props) => {
   return (
     <div className="outputWrap">
-      <header className="outputWrap__header" />
+      <h2 className="outputWrap__header">Result</h2>
       <article
         className="outputWrap__view"
         id="preview"
@@ -106,22 +106,19 @@ function ConverterMd(props) {
 }
 
 //React-Redux:
-const putStateToProps = state => {
+const putStateToProps = (state) => {
   return { input: state.input, output: state.output };
 };
 
-const putActionsToProps = dispatch => {
+const putActionsToProps = (dispatch) => {
   return {
-    updatePreview: md => {
+    updatePreview: (md) => {
       dispatch(getNewConvertedMd(md));
-    }
+    },
   };
 };
 
-const Container = connect(
-  putStateToProps,
-  putActionsToProps
-)(ConverterMd);
+const Container = connect(putStateToProps, putActionsToProps)(ConverterMd);
 
 class App extends React.Component {
   render() {
