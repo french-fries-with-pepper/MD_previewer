@@ -75,7 +75,7 @@ class Editor extends React.Component {
           id="editor"
           cols="30"
           rows="10"
-          placeholder="please type your markdown texet here"
+          placeholder="please, type your markdown text here"
           value={this.props.mdText}
           onChange={this.handleChange}
         />
