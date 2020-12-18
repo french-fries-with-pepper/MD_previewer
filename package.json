@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "dompurify": "^1.0.11",
+    "dompurify": "^2.0.17",
     "gh-pages": "^2.2.0",
     "marked": "^0.7.0",
     "react": "^16.13.1",
